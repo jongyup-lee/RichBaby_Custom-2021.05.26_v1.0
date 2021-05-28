@@ -91,17 +91,7 @@ const Signup = ({navigation}) => {
                     onSubmitEditing={() => refEmail.current.focus()}
                     onBlur={() => setName(name.trim())}
                     maxLength={12}                    
-                />
-    <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
-      <View>
-        <Text>First</Text>
-        <RadioButton value="first" />
-      </View>
-      <View>
-        <Text>Second</Text>
-        <RadioButton value="second" />
-      </View>
-    </RadioButton.Group>             
+                />            
                 <Input 
                     ref={refEmail}
                     label="Email" 

@@ -47,10 +47,11 @@ const Dropdown = ({selTitle, items, onValueChange, value}) => {
             inputAndroid: {
               fontSize: 16,
               paddingHorizontal: 10,
-              paddingVertical: 8,
-              borderWidth: 0.5,
-              borderColor: 'purple',
-              borderRadius: 8,
+              paddingVertical: 12,
+              border: 1,
+              borderWidth: 1,
+              borderColor: 'red',
+              borderRadius: 5,
               color: 'black',
               paddingRight: 30, // to ensure the text is never behind the icon
             },

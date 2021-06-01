@@ -23,6 +23,7 @@ const Signup = ({navigation}) => {
   const {spinner} = useContext(ProgressContext);
 
   const [name, setName] = useState('');
+  const [nickName, setNickName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -31,6 +32,7 @@ const Signup = ({navigation}) => {
   const [disabled, setDisabled] = useState(true);
   const [rnPicker, setRnPicker] = useState('');
 
+  const refNickName = useRef(null);
   const refEmail = useRef(null);
   const refPassword = useRef(null);
   const refPasswordConfirm = useRef(null);
@@ -58,9 +60,11 @@ const Signup = ({navigation}) => {
       let error = '';
       if (!name) {
         error = 'Please enter your name';
-      } else if (!email) {
+      } else if (!nickName) {
+        error = 'Please enter your nickName';
+      } else if (!email && rnPicker !== 'CHLD') {
         error = 'Please enter your email';
-      } else if (!validateEmail(email)) {
+      } else if (!validateEmail(email) && rnPicker !== 'CHLD') {
         error = 'Please verify your email';
       } else if (password.length < 6) {
         error = 'The password must contain 6 characters at least';
@@ -105,9 +109,19 @@ const Signup = ({navigation}) => {
                   returnkeyType="next" 
                   value={name} 
                   onChangeText={setName} 
-                  onSubmitEditing={() => refEmail.current.focus()}
+                  onSubmitEditing={() => refNickName.current.focus()}
                   onBlur={() => setName(name.trim())}
                   maxLength={12}                    
+                />
+                <Input 
+                  ref={refNickName}
+                  label="닉네임" 
+                  placeholder="닉네임" 
+                  returnkeyType="next" 
+                  value={nickName} 
+                  onChangeText={setNickName} 
+                  onSubmitEditing={() => refEmail.current.focus()}
+                  onBlur={() => setNickName(nickName.trim())}
                 />
                 <Input 
                   ref={refEmail}
@@ -165,8 +179,19 @@ const Signup = ({navigation}) => {
                 returnkeyType="next" 
                 value={name} 
                 onChangeText={setName} 
-                onSubmitEditing={() => refEmail.current.focus()}
+                onSubmitEditing={() => refNickName.current.focus()}
                 onBlur={() => setName(name.trim())}
+                maxLength={12}                    
+              />
+              <Input 
+                ref={refNickName}
+                label="닉네임" 
+                placeholder="닉네임" 
+                returnkeyType="next" 
+                value={nickName} 
+                onChangeText={setNickName} 
+                onSubmitEditing={() => refPassword.current.focus()}
+                onBlur={() => setNickName(nickName.trim())}
                 maxLength={12}                    
               />
               <Input 

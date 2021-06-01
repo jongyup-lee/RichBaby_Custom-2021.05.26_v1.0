@@ -24,15 +24,19 @@ const Signup = ({navigation}) => {
 
   const [name, setName] = useState('');
   const [nickName, setNickName] = useState('');
+  const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');  
+  const [famileeCode, setFamileeCode] = useState('');
   const [photo, setPhoto] = useState(DEFAULT_PHOTO);
   const [errorMessage, setErrorMessage] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [rnPicker, setRnPicker] = useState('');
 
   const refNickName = useRef(null);
+  const refPhone = useRef(null);
+  const refFamileeCode = useRef(null);
   const refEmail = useRef(null);
   const refPassword = useRef(null);
   const refPasswordConfirm = useRef(null);
@@ -49,13 +53,24 @@ const Signup = ({navigation}) => {
     }
   ];
 
-  useEffect(() => {
-    setDisabled(
-      !(name && email && password && passwordConfirm && !errorMessage)
-    );
-  }, [email, name, passwordConfirm, password, errorMessage]);
+  if (rnPicker !== 'CHLD') {
+    console.log('1');
+    useEffect(() => {
+      setDisabled(
+        !(name && email && password && passwordConfirm && !errorMessage)
+      );
+    }, [email, name, passwordConfirm, password, errorMessage]);
+  }else{
+    console.log('2');
+    useEffect(() => {
+      setDisabled(
+        !(name && password && passwordConfirm && !errorMessage)
+      );
+    }, [name, passwordConfirm, password, errorMessage]);    
+  }
     
   useEffect(() => {
+    console.log('3');
     if (refDidMount.current) {
       let error = '';
       if (!name) {
@@ -79,6 +94,7 @@ const Signup = ({navigation}) => {
     }
   }, [email, name, passwordConfirm, password]);
 
+  
   const _handleSignupBtnPress = async () => {
       try{
           spinner.start();
@@ -100,7 +116,7 @@ const Signup = ({navigation}) => {
                   items = {divison}
                   onValueChange={setRnPicker}
                   value = {rnPicker}
-                  onBlur={() => setRnPicker(rnPicker)}
+                  //onBlur={() => setRnPicker(rnPicker)}
                   //onValueChange={(value) => {console.log(value)}}
                 />
                 <Input 
@@ -120,8 +136,18 @@ const Signup = ({navigation}) => {
                   returnkeyType="next" 
                   value={nickName} 
                   onChangeText={setNickName} 
-                  onSubmitEditing={() => refEmail.current.focus()}
+                  onSubmitEditing={() => refPhone.current.focus()}
                   onBlur={() => setNickName(nickName.trim())}
+                />
+                <Input 
+                  ref={refPhone}
+                  label="휴대전화번호" 
+                  placeholder="휴대전화번호" 
+                  returnkeyType="next" 
+                  value={phone} 
+                  onChangeText={setPhone} 
+                  onSubmitEditing={() => refEmail.current.focus()}
+                  onBlur={() => setPhone(phone)}
                 />
                 <Input 
                   ref={refEmail}
@@ -154,6 +180,14 @@ const Signup = ({navigation}) => {
                     isPassword={true}
                     onSubmitEditing={_handleSignupBtnPress}
                     onBlur={() => setPasswordConfirm(removeWhitespace(passwordConfirm))}
+                />
+                <Input 
+                    label="가족코드" 
+                    placeholder="휴대전화번호 (자동입력)" 
+                    returnkeyType="done" 
+                    value={famileeCode}
+                    onChangeText={setFamileeCode} 
+                    onBlur={() => setFamileeCode(famileeCode)}
                 />
                 <ErrorMessage message={errorMessage} />
                 <Button title="sign up" onPress={_handleSignupBtnPress} disabled={disabled} />            
@@ -190,9 +224,19 @@ const Signup = ({navigation}) => {
                 returnkeyType="next" 
                 value={nickName} 
                 onChangeText={setNickName} 
-                onSubmitEditing={() => refPassword.current.focus()}
+                onSubmitEditing={() => refFamileeCode.current.focus()}
                 onBlur={() => setNickName(nickName.trim())}
                 maxLength={12}                    
+              />
+              <Input 
+                  ref={refFamileeCode}
+                  label="가족코드" 
+                  placeholder="가입하신 부모님 핸드폰 번호" 
+                  returnkeyType="next" 
+                  value={famileeCode}
+                  onChangeText={setFamileeCode} 
+                  onSubmitEditing={() => refPassword.current.focus()}
+                  onBlur={() => setFamileeCode(famileeCode)}
               />
               <Input 
                   ref={refPassword}
@@ -222,6 +266,8 @@ const Signup = ({navigation}) => {
       </KeyboardAwareScrollView>
     );
   }
+  
+  console.log('4');
 };
 
 export default Signup;

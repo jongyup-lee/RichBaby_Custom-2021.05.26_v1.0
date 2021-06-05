@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {ThemeContext} from 'styled-components/native'
 import {createStackNavigator} from '@react-navigation/stack';
-import {Signin, Signup, Profile} from '../screens';
+import {Signin, Signup, SignupKind, Profile} from '../screens';
 import {MaterialIcons} from '@expo/vector-icons'; 
 
 const Stack = createStackNavigator();
@@ -23,6 +23,23 @@ const Auth = () => {
             <Stack.Screen 
                 name="Signup" 
                 component={Signup} 
+                options={{
+                    headerTitleAlign: 'center',
+                    headerBackTitleVisible: false,
+                    headerTintColor: theme.text,
+                    headerLeft: ({onPress, tintColor}) => (
+                        <MaterialIcons
+                            name="keyboard-arrow-left"
+                            size={38}
+                            color={tintColor}
+                            onPress={onPress}
+                        />                        
+                    ),
+                }}
+            />
+            <Stack.Screen 
+                name="회원구분"
+                component={SignupKind} 
                 options={{
                     headerTitleAlign: 'center',
                     headerBackTitleVisible: false,

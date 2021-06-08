@@ -16,7 +16,7 @@ const Container = styled.View`
 
 const DEFAULT_PHOTO = 'https://firebasestorage.googleapis.com/v0/b/babyrich-94b2d.appspot.com/o/face.png?alt=media';
 
-const Signup = ({navigation}) => {
+const SignupC = ({navigation}) => {
     const {setUser} = useContext(UserContext);
     const {spinner} = useContext(ProgressContext);
 
@@ -140,4 +140,4 @@ const Signup = ({navigation}) => {
     );
 };
 
-export default Signup;
+export default SignupC;

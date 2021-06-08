@@ -22,11 +22,11 @@ const MemberShip = ({navigation}) => {
     return(
         <KeyboardAwareScrollView extraHeight={200} contentContainerStyle={{flex: 1}}>
             <Container insets={insets}>
-                <RacButton title="부모회원 가입" 
+                <RacButton title="SignupP" 
                     onPress={ () => navigation.navigate('SignupP') }
                 />
                 <RacButton 
-                    title="자녀회원 가입" 
+                    title="SignupC" 
                     onPress={ () => navigation.navigate('SignupC') }
                 />
             </Container>

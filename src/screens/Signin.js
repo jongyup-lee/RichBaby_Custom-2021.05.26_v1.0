@@ -98,7 +98,7 @@ const Signin = ({navigation}) => {
                 <Button title="sign in" onPress={_handleSigninBtnPress} disabled={disabled} />
                 <Button 
                     title="or sign up" 
-                    onPress={ () => navigation.navigate('Signup') }
+                    onPress={ () => navigation.navigate('MemberShip') }
                     containerStyle={{marginTop:0, backgroundColor:'transparent'}}
                     textStyle={{color: theme.btnTextLink, fontSize: 18}}
                 />

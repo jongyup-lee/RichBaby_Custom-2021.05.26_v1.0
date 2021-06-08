@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {ThemeContext} from 'styled-components/native'
 import {createStackNavigator} from '@react-navigation/stack';
-import {Signin, Signup, SignupKind, Profile} from '../screens';
+import {Signin, Signup, MemberShip, Profile} from '../screens';
 import {MaterialIcons} from '@expo/vector-icons'; 
 
 const Stack = createStackNavigator();
@@ -38,8 +38,8 @@ const Auth = () => {
                 }}
             />
             <Stack.Screen 
-                name="회원구분"
-                component={SignupKind} 
+                name="MemberShip"
+                component={MemberShip} 
                 options={{
                     headerTitleAlign: 'center',
                     headerBackTitleVisible: false,

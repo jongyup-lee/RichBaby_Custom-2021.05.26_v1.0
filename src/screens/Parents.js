@@ -17,7 +17,7 @@ const Container = styled.View`
 
 const DEFAULT_PHOTO = 'https://firebasestorage.googleapis.com/v0/b/babyrich-94b2d.appspot.com/o/face.png?alt=media';
 
-const SignupP = ({navigation}) => {
+const Parents = ({navigation}) => {
     const {setUser} = useContext(UserContext);
     const {spinner} = useContext(ProgressContext);
 
@@ -42,44 +42,51 @@ const SignupP = ({navigation}) => {
 
     useEffect(() => {
         setDisabled(
-            !(name && email && password && passwordConfirm && !errorMessage)
+            !(name && nickName&& phone && email && password && passwordConfirm && !errorMessage)
         );
-    }, [email, name, passwordConfirm, password, errorMessage]);
+    }, [name, nickName, phone, email, passwordConfirm, password, errorMessage]);
     
     useEffect(() => {
         if (refDidMount.current) {
             let error = '';
             if (!name) {
-            error = 'Please enter your name';
+                error = 'Please enter your name';
             } else if (!nickName) {
-            error = 'Please enter your nickName';
+                error = 'Please enter your nickName';
+            } else if (!phone) {
+                error = 'Please enter your phone Number';
             } else if (!email) {
-            error = 'Please enter your email';
+                error = 'Please enter your email';
             } else if (!validateEmail(email)) {
-            error = 'Please verify your email';
+                error = 'Please verify your email';
             } else if (password.length < 6) {
-            error = 'The password must contain 6 characters at least';
+                error = 'The password must contain 6 characters at least';
             } else if (password !== passwordConfirm) {
-            error = 'Password need to match';
+                error = 'Password need to match';
             } else {
-            error = '';
+                error = '';
             }
             setErrorMessage(error);
         } else {
             refDidMount.current = true;
         }
-    }, [email, name, passwordConfirm, password]);
+    }, [name, nickName, phone, email, password, passwordConfirm]);
 
 
     const _handleSignupBtnPress = async () => {
-        try{
-            spinner.start();
-            const user = await signup({name, email, password, photo});
-            setUser(user);
-        }catch(e){
-            Alert.alert('Signup Error', e.message);
-        }finally{
-            spinner.stop();
+        console.log('disabled : ' + disabled);
+        if(!disabled){
+            try{
+                spinner.start();
+                const user = await signup({name, email, password, photo}, 'P');
+                //const user = await signup();
+                return;
+                setUser(user);
+            }catch(e){
+                Alert.alert('Signup Error', e.message);
+            }finally{
+                spinner.stop();
+            }
         }
     }
 
@@ -165,4 +172,4 @@ const SignupP = ({navigation}) => {
     );
 }
 
-export default SignupP;
+export default Parents;

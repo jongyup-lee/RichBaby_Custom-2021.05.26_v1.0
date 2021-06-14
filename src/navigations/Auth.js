@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {ThemeContext} from 'styled-components/native'
 import {createStackNavigator} from '@react-navigation/stack';
-import {Signin, MemberShip} from '../screens';
+import {Signin, MemberShip, Parents, Child} from '../screens';
 import {MaterialIcons} from '@expo/vector-icons'; 
 
 const Stack = createStackNavigator();
@@ -23,6 +23,40 @@ const Auth = () => {
             <Stack.Screen 
                 name="MemberShip"
                 component={MemberShip} 
+                options={{
+                    headerTitleAlign: 'center',
+                    headerBackTitleVisible: false,
+                    headerTintColor: theme.text,
+                    headerLeft: ({onPress, tintColor}) => (
+                        <MaterialIcons
+                            name="keyboard-arrow-left"
+                            size={38}
+                            color={tintColor}
+                            onPress={onPress}
+                        />                        
+                    ),
+                }}
+            />
+            <Stack.Screen 
+                name="Parents" 
+                component={Parents} 
+                options={{
+                    headerTitleAlign: 'center',
+                    headerBackTitleVisible: false,
+                    headerTintColor: theme.text,
+                    headerLeft: ({onPress, tintColor}) => (
+                        <MaterialIcons
+                            name="keyboard-arrow-left"
+                            size={38}
+                            color={tintColor}
+                            onPress={onPress}
+                        />                        
+                    ),
+                }}
+            />
+            <Stack.Screen 
+                name="Child" 
+                component={Child} 
                 options={{
                     headerTitleAlign: 'center',
                     headerBackTitleVisible: false,

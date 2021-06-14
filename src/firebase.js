@@ -21,86 +21,37 @@ const Auth = app.auth();
   /* 자체 DataBase 를 이용한 로그인 방식
   /************************************************* */
 
-export const signin = (data) => {
-  console.log("위치 1");
-  const tmpData = {
-    MEMB_IDNT: "01082625642",
-    MEMB_PWRD: "1q2w3e4r!!"
-  };
-  
-  //const getMoviesFromApi = () => {
-    console.log('1번');
-    return fetch('http://192.168.190.52:3000/auth/login', {
-      method: 'POST',
-      body: JSON.stringify(tmpData),
-      headers: {
-        //Header Defination
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        if(json.status == 'success'){
-          console.log('2번');
-          return json.data;
-        }else{
-          console.log('3번 : ' + json.message);
-          return;
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-      console.log('4번');
-  //};
-  //console.log('5번');
-
-  //return getMoviesFromApi();
-
-  /*
-  fetch('http://192.168.0.18:3000/auth/login', {
+const transaction = (url, tmpData) => {
+  return fetch(url, {
     method: 'POST',
-    body: JSON.stringify(this.state),
+    body: JSON.stringify(tmpData),
     headers: {
       //Header Defination
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
     },
   })
   .then((response) => response.json())
-  .then((responseJson) => {
-    console.log("위치 2");
-    //Hide Loader
-    //setLoading(false);
-    // If server response message same as Data Matched
-    if (responseJson.status == 'success') {
-      console.log("위치 3");
-      //AsyncStorage.setItem('user_id', responseJson.data.stu_id);
-      //navigation.replace('DrawerNavigationRoutes');
-      const user = {
-        "user" : responseJson
-      };
-
-      const {user1} = responseJson
-
-      console.log('[firebase.js] signin - success (user) : ' + JSON.stringify(user));
-      console.log('[firebase.js] signin - success (user1) : ' + JSON.stringify(user1));
-      return user.data;
-
-    } else {
-        console.log("위치 4");
-        //setErrortext('아이디와 비밀번호를 다시 확인해주세요');
-        console.log('Please check your id or password');
-        return;
-      }
-    })
-    .catch((error) => {
-      //Hide Loader
-      //setLoading(false);
-      console.error(error);
+  .then((json) => {
+    if(json.status == 'success'){
+      return json.data;
+    }else{      
       return;
-    });
-    console.log("위치 5");
-    */
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+}
+
+export const signin = (data) => {
+  const url = 'http://192.168.190.52:3000/auth/login';
+  const tmpData = {
+    MEMB_IDNT: "01082625642",
+    MEMB_PWRD: "1q2w3e4r!!"
+  };
+
+  const jsonData = transaction(url, tmpData);
+  return jsonData;
 };
 
 const uploadImage = async uri => {
@@ -131,12 +82,16 @@ const uploadImage = async uri => {
   return await snapshot.ref.getDownloadURL();
 };
 
-export const signup = async ({ name, email, password, photo }) => {
-  const { user } = await Auth.createUserWithEmailAndPassword(email, password);
-  const photoURL = await uploadImage(photo);
-  await user.updateProfile({ displayName: name, photoURL });
-  console.log('[firebase - signup] user : ' + JSON.stringify(user));
-  return user;
+//export const signup = async ({ name, email, password, photo }) => {
+export const signup = async (data, flag) => {
+  console.log('data : ' + data);
+  console.log('flag : ' + flag);
+  // const { user } = await Auth.createUserWithEmailAndPassword(email, password);
+  // const photoURL = await uploadImage(photo);
+  // await user.updateProfile({ displayName: name, photoURL });
+  // console.log('[firebase - signup] user : ' + JSON.stringify(user));
+  // return user;
+  return;
 };
 
 export const getCurrentUser = () => {

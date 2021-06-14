@@ -1,10 +1,10 @@
 import Signin from './Signin';
-import SignupP from './SignupP';
-import SignupC from './SignupC';
+import Parents from './Parents';
+import Child from './Child';
 import MemberShip from './MemberShip';
 import Profile from './Profile';
 import ChannelList from './ChannelList';
 import ChannelCreation from './ChannelCreation';
 import Channel from './Channel';
 
-export {Signin, SignupP, SignupC, MemberShip, Profile, ChannelList, ChannelCreation, Channel};
+export {Signin, Parents, Child, MemberShip, Profile, ChannelList, ChannelCreation, Channel};

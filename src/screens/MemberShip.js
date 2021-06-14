@@ -4,7 +4,6 @@ import styled from 'styled-components/native';
 import {RacButton} from '../components';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {UserContext, ProgressContext} from '../contexts';
 
 const Container = styled.View`
     flex: 1;
@@ -18,16 +17,17 @@ const Container = styled.View`
 `;
 
 const MemberShip = ({navigation}) => {
+    const theme = useContext(ThemeContext);
     const insets = useSafeAreaInsets();
     return(
         <KeyboardAwareScrollView extraHeight={200} contentContainerStyle={{flex: 1}}>
             <Container insets={insets}>
-                <RacButton title="SignupP" 
-                    onPress={ () => navigation.navigate('SignupP') }
+                <RacButton title="Parents" 
+                    onPress={ () => navigation.navigate('Parents') }
                 />
                 <RacButton 
-                    title="SignupC" 
-                    onPress={ () => navigation.navigate('SignupC') }
+                    title="Child" 
+                    onPress={ () => navigation.navigate('Child') }
                 />
             </Container>
         </KeyboardAwareScrollView>

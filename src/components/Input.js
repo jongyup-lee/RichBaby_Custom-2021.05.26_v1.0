@@ -11,7 +11,7 @@ const Container = styled.View`
 const Label = styled.Text`
     font-size: 14px;
     font-weight: 600;
-    margin-bottom: 6px;
+    margin-bottom: 3px;
     color: ${({theme, isFocused}) => isFocused ? theme.text : theme.inputLabel};
 `;
 
@@ -20,7 +20,7 @@ const StyledInput = styled.TextInput.attrs(({ theme }) => ({
 }))`
     background-color: ${ ({ theme, editable }) => editable ? theme.inputBackground : theme.inputDisabled};
     color: ${ ({ theme }) => theme.text };
-    padding: 20px 10px;
+    padding: 10px 10px;
     font-size: 16px;
     border: 1px solid  ${ ({theme, isFocused}) => isFocused ? theme.text : theme.inputBorder };
     border-radius: 4px;

@@ -78,8 +78,8 @@ const Parents = ({navigation}) => {
         if(!disabled){
             try{
                 spinner.start();
-                const user = await signup({name, email, password, photo}, 'P');
-                //const user = await signup();
+                //const user = await signup({name, email, password, photo});
+                const user = await signup({name, nickName, phone, email, password, photo}, 'P');
                 return;
                 setUser(user);
             }catch(e){

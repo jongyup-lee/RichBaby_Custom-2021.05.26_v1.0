@@ -22,6 +22,7 @@ const Auth = app.auth();
   /************************************************* */
 
 const transaction = (url, tmpData) => {
+  console.log('[transaction] url : ' + url);
   return fetch(url, {
     method: 'POST',
     body: JSON.stringify(tmpData),
@@ -32,10 +33,13 @@ const transaction = (url, tmpData) => {
   })
   .then((response) => response.json())
   .then((json) => {
+    console.log('[transaction] json : ' + json); 
     if(json.status == 'success'){
-      return json.data;
+      console.log("success");
+      //return json.data;
     }else{      
-      return;
+      console.log("false");
+      //return;
     }
   })
   .catch((error) => {
@@ -43,15 +47,17 @@ const transaction = (url, tmpData) => {
   });
 }
 
-export const signin = (data) => {
-  const url = 'http://192.168.190.52:3000/auth/login';
+export const signin = async (data) => {
+  console.log('[firebase] signin()');
+  const url = 'http://192.168.203.52:3000/auth/login';
   const tmpData = {
-    MEMB_IDNT: "01082625642",
-    MEMB_PWRD: "1q2w3e4r!!"
+    MEMB_IDNT: "01097425642",
+    MEMB_PWRD: "1q2w3e4r5t"
   };
 
-  const jsonData = transaction(url, tmpData);
-  return jsonData;
+  const jsonData = await transaction(url, tmpData);
+  console.log('jsonData : ' + jsonData.data.result);
+  return;
 };
 
 const uploadImage = async uri => {

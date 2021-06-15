@@ -42,10 +42,11 @@ const Signin = ({navigation}) => {
 
     const _handleEmailChange = email => {
         const changeEmail = removeWhitespace(email);
-        setEmail(changeEmail);
+        /*setEmail(changeEmail);
         setErrorMessage(
             validateEmail(changeEmail) ? '' : 'Please verify your email'
         );
+        */
     };
     
     const _handlePasswordChange = (password) => {
